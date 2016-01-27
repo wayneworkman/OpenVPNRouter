@@ -772,11 +772,7 @@ configureDHCP() {
         echo 'ddns-update-style interim;' >> $dhcpFile
         echo 'ignore client-updates;' >> $dhcpFile
         echo " " >> $dhcpFile
-        #Do external network first.
-        echo 'subnet '$externalNetwork' netmask '$externalMask' {' >> $dhcpFile
-        echo '}' >> $dhcpFile
-        echo " " >> $dhcpFile
-        #Do internal network second
+        #Internal network
         echo 'subnet '$internalNetwork' netmask '$internalMask' {' >> $dhcpFile
         echo 'option subnet-mask '$internalMask';' >> $dhcpFile
         echo 'range dynamic-bootp '$firstAddress' '$lastAddress';' >> $dhcpFile
