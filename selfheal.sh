@@ -8,7 +8,7 @@ DIR=/opt/ovr
 
 site=http://www.google.com
 
-speed=2
+speed=5
 
 
 #Send bars for seperation in log.
