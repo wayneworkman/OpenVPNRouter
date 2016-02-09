@@ -106,7 +106,21 @@ else
 		service iptables save >> $DIR/ovr.log
 		$echo $tun0IP > $DIR/oldIP.txt
 	else
+		numberOfFailures=0
 		$echo Failed to fix at $dt. >> $DIR/ovr.log
+		if [[ -e $DIR/numberOfFailures.txt ]]; then
+			numberOfFailures=$( $echo $DIR/numberOfFailures.txt )
+		fi
+		let numberOfFailures+=1
+		if [[ $numberOfFailures -ge $failuresBeforeReboot ]]; then
+			if [[ -e $DIR/numberOfFailures.txt ]]; then
+				rm -f $DIR/numberOfFailures.txt
+			fi
+			$echo "Reboot at: $dt" >> $DIR/reboot.log
+			$reboot
+		else
+			echo $numberOfFailures > $DIR/numberOfFailures
+		fi
 	fi
 fi
 

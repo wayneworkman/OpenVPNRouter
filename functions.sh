@@ -447,7 +447,11 @@ IFS=:
         if [[ -f $p/modprobe ]]; then
                 modprobe=$p/modprobe
         fi	
-
+	
+	#Get reboot path
+	if [[ -f $p/reboot ]]; then
+		reboot=$p/reboot
+	fi
 		
   done
 
@@ -457,7 +461,7 @@ IFS=$previousIFS
 
 #---- Store the command paths at top of self-heal script ----#
 
-
+echo reboot=$reboot | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo modprobe=$modprobe | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo ip=$ip | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo grep=$grep | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
@@ -470,6 +474,14 @@ echo '#!/bin/bash' | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/sel
 
 #make the main script executable.
 chmod +x $DIR/selfheal.sh
+
+}
+additionalSelfHealSettings() {
+
+
+#this function MUST be called before the "configurePaths" function.
+echo failuresBeforeReboot=$failuresBeforeReboot | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
+
 
 }
 pickSite() {

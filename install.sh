@@ -6,6 +6,9 @@ site=http://google.com
 desiredInternalIP=10.0.0.1
 desiredInternalMask=16
 doDHCP=1
+failuresBeforeReboot=1
+
+
 
 #Source the functions script.
 . "$currentDir/functions.sh"
@@ -57,6 +60,9 @@ initiateServices
 
 #setup the self healing file
 setupSelfHeal
+
+#Additional self heal settings
+additionalSelfHealSettings
 
 #set paths inside self heal script
 configurePaths
