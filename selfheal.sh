@@ -6,7 +6,7 @@
 #Set working directory.
 DIR=/opt/ovr
 
-site=http://www.google.com
+site=8.8.8.8
 
 speed=5
 
@@ -38,7 +38,9 @@ $echo Testing $device on $dt with IP $tun0IP for existence and connectivity... >
 
 if [ -f $device ]; then
 	#Test for internet connection via old IP address
-	$wget -q --tries $speed --timeout $speed --spider $site --bind-address $tun0IP
+	#$wget -q --tries $speed --timeout $speed --spider $site --bind-address $tun0IP
+	$ping -c 1 $site -I tun0
+
 
 	if [[ $? -eq 0 ]]; then
 		$echo "Tunnel is online." >> $DIR/ovr.log
@@ -99,7 +101,10 @@ else
 	$DIR/./setiptables.sh
 
 
-	$wget -q --tries $speed --timeout $speed --spider $site --bind-address $tun0IP
+	#$wget -q --tries $speed --timeout $speed --spider $site --bind-address $tun0IP
+	$ping -c 1 $site -I tun0
+
+
 	if [[ $? -eq 0 ]]; then
 		$echo " " >> $DIR/ovr.log
 		$echo "Tun0 is now online, saving rules!" >> $DIR/ovr.log

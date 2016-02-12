@@ -103,7 +103,8 @@ Choose your DNS Provider:
 
 1   FreeDNS 37.235.1.174 & 37.235.1.177
 2   OpenDNS 208.67.222.222 & 208.67.220.220
-3   other
+3   Google DNS 8.8.8.8 & 8.8.4.4
+4   other
 
 "
 
@@ -112,7 +113,7 @@ Choose your DNS Provider:
 	read DNS # Assign user input to variable
 
 
-	if [[ -z $DNS || ( $DNS != 1 && $DNS != 2 && $DNS != 3 ) ]]; then
+	if [[ -z $DNS || ( $DNS != 1 && $DNS != 2 && $DNS != 3 && $DNS != 4 ) ]]; then
 		echo Selection for DNS was not acceptable, exiting.
 		exit
 	fi
@@ -122,6 +123,9 @@ Choose your DNS Provider:
 	elif [[ $DNS == 2 ]]; then
 		MasterDNS=208.67.222.222
                 SlaveDNS=208.67.220.220
+	elif [[ $DNS == 3 ]]; then
+		MasterDNS=8.8.8.8
+		SlaveDNS=8.8.4.4
 	else 
 		echo -n "Enter in primary DNS address: "
 		read MasterDNS
@@ -452,7 +456,11 @@ IFS=:
 	if [[ -f $p/reboot ]]; then
 		reboot=$p/reboot
 	fi
-		
+	
+	#Get ping path
+	if [[ -f $p/ping ]]; then
+		ping=$p/ping
+	fi		
   done
 
 #Restore previous contents of IFS
@@ -461,6 +469,7 @@ IFS=$previousIFS
 
 #---- Store the command paths at top of self-heal script ----#
 
+echo ping=$ping | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo reboot=$reboot | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo modprobe=$modprobe | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh
 echo ip=$ip | cat - $DIR/selfheal.sh > $DIR/temp && mv $DIR/temp $DIR/selfheal.sh

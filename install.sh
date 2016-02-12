@@ -2,7 +2,7 @@
 DIR=/opt/ovr
 currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 speed=2
-site=http://google.com
+site=8.8.8.8
 desiredInternalIP=10.0.0.1
 desiredInternalMask=16
 doDHCP=1
