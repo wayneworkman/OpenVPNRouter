@@ -13,7 +13,7 @@ speed=5
 
 #Send bars for seperation in log.
 
-$echo "-------------------------------------------------------" >> $DIR/ovr.log
+$echo "##########" >> $DIR/ovr.log
 
 
 
@@ -31,13 +31,12 @@ device="/proc/net/dev_snmp6/tun0"
 $echo Testing $device on $dt with IP $tun0IP for existence and connectivity... >> $DIR/ovr.log
 
 if [ -f $device ]; then
-	#Test for internet connection via old IP address
-	#$wget -q --tries $speed --timeout $speed --spider $site --bind-address $tun0IP
+
 	$ping -c 1 $site -I tun0
 
 
 	if [[ $? -eq 0 ]]; then
-		$echo "Tunnel is online." >> $DIR/ovr.log
+		$echo "Tunnel is online at $dt." >> $DIR/ovr.log
 		result=0
 	else
 		$echo "Tunnel exists but is not online." >> $DIR/ovr.log
@@ -51,7 +50,7 @@ fi
 
 
 if [[ $result == 0 ]]; then
-	$echo Online at $dt >> $DIR/ovr.log
+	#nothing, all is good.
 else
 
 	$echo Attempting to fix... >> $DIR/ovr.log
