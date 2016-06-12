@@ -19,7 +19,7 @@ $echo "##########" >> $DIR/ovr.log
 
 #Write log entry to self-heal.log
 dt="$( $date  +"%I:%M %p %m-%d-%Y")"
-$echo $dt >> $DIR/ovr.log
+
 
 #Get tun0's IP.
 tun0IP="$( $ip addr show | $grep tun0 | $grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | $grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")"
@@ -28,7 +28,7 @@ tun0IP="$( $ip addr show | $grep tun0 | $grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[
 #CentOS7
 device="/proc/net/dev_snmp6/tun0"
 
-$echo Testing $device on $dt with IP $tun0IP for existence and connectivity... >> $DIR/ovr.log
+$echo Testing $device with IP $tun0IP for existence and connectivity at $dt >> $DIR/ovr.log
 
 if [ -f $device ]; then
 
@@ -36,7 +36,7 @@ if [ -f $device ]; then
 
 
 	if [[ $? -eq 0 ]]; then
-		$echo "Tunnel is online at $dt." >> $DIR/ovr.log
+		$echo "Tunnel is online." >> $DIR/ovr.log
 		result=0
 	else
 		$echo "Tunnel exists but is not online." >> $DIR/ovr.log
@@ -105,7 +105,7 @@ else
 		$echo $tun0IP > $DIR/oldIP.txt
 	else
 		numberOfFailures=0
-		$echo Failed to fix at $dt. >> $DIR/ovr.log
+		$echo Failed to fix. >> $DIR/ovr.log
 		if [[ -e $DIR/numberOfFailures.txt ]]; then
 			numberOfFailures=$( $echo $DIR/numberOfFailures.txt )
 		fi
