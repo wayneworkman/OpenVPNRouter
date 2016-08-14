@@ -18,8 +18,8 @@ systemctl restart sshd
 
 #include new forwarded port through firewall.
 iptables=/usr/sbin/iptables
-$iptables -A INPUT -i enp1s8 -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
-$iptables -A OUTPUT -o enp1s8 -p tcp --sport $port -m state --state ESTABLISHED -j ACCEPT
+$iptables -I INPUT -i enp1s8 -p tcp --dport $port -m state --state NEW,ESTABLISHED -j ACCEPT
+$iptables -I OUTPUT -o enp1s8 -p tcp --sport $port -m state --state ESTABLISHED -j ACCEPT
 service iptables save
 
 
