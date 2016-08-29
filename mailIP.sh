@@ -32,9 +32,10 @@ client_id2=$(/usr/bin/head -n 100 /dev/urandom | /usr/bin/md5sum | /usr/bin/tr -
 port2=$(/usr/bin/wget -q --post-data="user=$USER&pass=$PASSWORD&client_id=$client_id2&local_ip=$tun0IP" -O - 'https://www.privateinternetaccess.com/vpninfo/port_forward_assignment' | /usr/bin/head -1)
 port2=$(echo $port2 | awk -F ':|}' '{print $2}')
 
-webServer=10.0.0.4
+internalAddress=10.0.0.4
+internalPort=80
 
-$iptables -I PREROUTING -t nat -i tun0 -p tcp --dport $port2 -j DNAT --to $webServer:80
+$iptables -I PREROUTING -t nat -i tun0 -p tcp --dport $port2 -j DNAT --to $internalAddress:$internalPort
 $iptables -I FORWARD -p tcp -d webServer --dport $port2 -j ACCEPT
 service iptables save
 
