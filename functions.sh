@@ -613,23 +613,29 @@ setupPIA() {
 		
 
 
-		echo client > $DIR/custom.ovpn
-		echo dev tun0 >> $DIR/custom.ovpn
-		echo proto udp >> $DIR/custom.ovpn
-		echo remote $ChosenSite $piaPort >> $DIR/custom.ovpn
-		echo resolv-retry infinite >> $DIR/custom.ovpn
-		echo nobind >> $DIR/custom.ovpn
-		echo persist-key >> $DIR/custom.ovpn
-		echo persist-tun >> $DIR/custom.ovpn
-		echo ca $DIR/ca.crt >> $DIR/custom.ovpn
-		echo tls-client >> $DIR/custom.ovpn
-		echo remote-cert-tls server >> $DIR/custom.ovpn
-		echo auth-user-pass >> $DIR/custom.ovpn
-		echo comp-lzo >> $DIR/custom.ovpn
-		echo verb 1 >> $DIR/custom.ovpn
-		echo reneg-sec 0 >> $DIR/custom.ovpn
-		echo crl-verify $DIR/crl.pem >> $DIR/custom.ovpn
-		echo auth-user-pass $DIR/login.conf >> $DIR/custom.ovpn
+                # This one is for the STRONG configuration. CONFIGURATION EXAMPLES IN THE DOWNLOAD FILES!!!
+
+		echo "client" > $DIR/custom.ovpn
+		echo "dev tun" >> $DIR/custom.ovpn
+		echo "proto udp" >> $DIR/custom.ovpn
+		echo "remote $ChosenSite $piaPort" >> $DIR/custom.ovpn
+		echo "resolv-retry infinite" >> $DIR/custom.ovpn
+		echo "nobind" >> $DIR/custom.ovpn
+		echo "persist-key" >> $DIR/custom.ovpn
+		echo "persist-tun" >> $DIR/custom.ovpn
+		echo "cipher aes-256-cbc" >> $DIR/custom.ovpn
+		echo "auth sha256" >> $DIR/custom.ovpn
+		echo "tls-client" >> $DIR/custom.ovpn
+		echo "remote-cert-tls server" >> $DIR/custom.ovpn
+		echo "auth-user-pass" >> $DIR/custom.ovpn
+		echo "comp-lzo" >> $DIR/custom.ovpn
+		echo "verb 1" >> $DIR/custom.ovpn
+		echo "reneg-sec 0" >> $DIR/custom.ovpn
+		echo "crl-verify $DIR/crl.pem" >> $DIR/custom.ovpn
+		echo "ca $DIR/ca.crt" >> $DIR/custom.ovpn
+		echo "disable-occ" >> $DIR/custom.ovpn
+                echo "auth-user-pass $DIR/login.conf" >> $DIR/custom.ovpn
+
 
 	fi
 }
