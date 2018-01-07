@@ -570,12 +570,24 @@ setupPIA() {
 			mkdir $DIR/openvpn
 		fi
 
-		wget https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
+                https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip
+		#wget https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
+                wget https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip -P $DIR/openvpn
+
 		unzip $DIR/openvpn/openvpn.zip -d $DIR/openvpn
 		rm -f $DIR/openvpn/openvpn.zip
 		rm -f $DIR/openvpn/*.ovpn
-		mv $DIR/openvpn/ca.rsa.2048.crt $DIR/ca.crt
-		mv $DIR/openvpn/crl.rsa.2048.pem $DIR/crl.pem
+
+                # Some of the files have .rs.2048 in the names. Some don't. Try all.
+	 	mv $DIR/openvpn/ca.crt $DIR/ca.crt > /dev/null 2>&1
+		mv $DIR/openvpn/crl..pem $DIR/crl.pem > /dev/null 2>&1
+
+                mv $DIR/openvpn/ca.rsa.2048.crt $DIR/ca.crt > /dev/null 2>&1
+                mv $DIR/openvpn/crl.rsa.2048.pem $DIR/crl.pem > /dev/null 2>&1
+
+                mv $DIR/openvpn/ca.rsa.4096.crt $DIR/ca.crt > /dev/null 2>&1
+                mv $DIR/openvpn/crl.rsa.4096.pem $DIR/crl.pem > /dev/null 2>&1
+
 		rm -rf $DIR/openvpn
 
 
