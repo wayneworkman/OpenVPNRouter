@@ -574,8 +574,8 @@ setupPIA() {
 		fi
 
                 https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip
-		#wget https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
-                wget https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip -P $DIR/openvpn
+		#wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
+                wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip -P $DIR/openvpn
 
 		unzip $DIR/openvpn/openvpn.zip -d $DIR/openvpn
 		rm -f $DIR/openvpn/openvpn.zip
