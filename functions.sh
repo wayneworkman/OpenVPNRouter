@@ -583,7 +583,7 @@ setupPIA() {
 
                 # Some of the files have .rs.2048 in the names. Some don't. Try all.
 	 	mv $DIR/openvpn/ca.crt $DIR/ca.crt > /dev/null 2>&1
-		mv $DIR/openvpn/crl..pem $DIR/crl.pem > /dev/null 2>&1
+		mv $DIR/openvpn/crl.pem $DIR/crl.pem > /dev/null 2>&1
 
                 mv $DIR/openvpn/ca.rsa.2048.crt $DIR/ca.crt > /dev/null 2>&1
                 mv $DIR/openvpn/crl.rsa.2048.pem $DIR/crl.pem > /dev/null 2>&1
