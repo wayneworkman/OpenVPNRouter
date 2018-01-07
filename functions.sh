@@ -190,12 +190,10 @@ identifyInterfaces() {
 
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
 	if [[ $? -eq 0 ]]; then
-		echo "interface $interface1name passed internet test."
 		interface1hasInternet=1
 		externalName=$interface1name
 		externalIP=$interface1ip
 	else
-		echo "interface $interface1name failed internet test."
 		interface1hasInternet=0
 		internalName=$interface1name
 		internalIP=$interface1ip
@@ -205,16 +203,20 @@ identifyInterfaces() {
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface2ip
 
 	if [[ $? -eq 0 ]]; then
-		echo "interface $interface2name passed internet test."
 		interface2hasInternet=1
 		externalName=$interface2name
 		externalIP=$interface2ip
 	else
-		echo "interface $interface2name passed internet test."
 		interface2hasInternet=0
 		internalName=$interface2name
 		internalIP=$interface2ip
 	fi
+
+
+
+        echo "Interface1 name: $interface1name interface1 IP: $interface1ip has internet: $interface1hasInternet"
+        echo "Interface2 name: $interface2name interface2 IP: $interface2ip has internet: $interface2hasInternet"
+        
 
 
 
