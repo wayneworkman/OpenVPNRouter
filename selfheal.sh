@@ -116,7 +116,7 @@ else
 				rm -f $DIR/numberOfFailures.txt
 			fi
 			$echo "Reboot at: $dt" >> $DIR/reboot.log
-			$reboot
+			#$reboot
 		else
 			echo $numberOfFailures > $DIR/numberOfFailures
 		fi
