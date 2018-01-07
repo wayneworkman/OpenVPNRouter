@@ -576,6 +576,14 @@ setupPIA() {
                 https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip
 		#wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
                 wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip -P $DIR/openvpn
+                
+
+                # Strong:
+                piaPort="1197"
+
+                # Default:
+                #piaPort="1198"
+
 
 		unzip $DIR/openvpn/openvpn.zip -d $DIR/openvpn
 		rm -f $DIR/openvpn/openvpn.zip
@@ -605,7 +613,7 @@ setupPIA() {
 		echo client > $DIR/custom.ovpn
 		echo dev tun0 >> $DIR/custom.ovpn
 		echo proto udp >> $DIR/custom.ovpn
-		echo remote $ChosenSite 1198 >> $DIR/custom.ovpn
+		echo remote $ChosenSite $piaPort >> $DIR/custom.ovpn
 		echo resolv-retry infinite >> $DIR/custom.ovpn
 		echo nobind >> $DIR/custom.ovpn
 		echo persist-key >> $DIR/custom.ovpn
