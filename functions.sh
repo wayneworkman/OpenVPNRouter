@@ -364,8 +364,11 @@ make_setiptables() {
 
 	echo " "
 
-	echo '$iptables' -A INPUT -i ${externalName} -p tcp --dport 22 -j DROP >> $DIR/setiptables.sh
-	echo '$iptables' -A OUTPUT -o ${externalName} -p tcp --sport 22 -j DROP >> $DIR/setiptables.sh
+	#echo '$iptables' -A INPUT -i ${externalName} -p tcp --dport 22 -j DROP >> $DIR/setiptables.sh
+	#echo '$iptables' -A OUTPUT -o ${externalName} -p tcp --sport 22 -j DROP >> $DIR/setiptables.sh
+
+        echo '$iptables' -A INPUT -i ${externalName} -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT >> $DIR/setiptables.sh
+        echo '$iptables' -A OUTPUT -o ${externalName} -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT  >> $DIR/setiptables.sh
 
 	echo '$iptables' -A INPUT -i ${internalName} -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT >> $DIR/setiptables.sh
 	echo '$iptables' -A OUTPUT -o ${internalName} -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT  >> $DIR/setiptables.sh
