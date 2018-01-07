@@ -191,12 +191,12 @@ identifyInterfaces() {
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
 echo interface1ip: $interface1ip
 	if [[ $? -eq 0 ]]; then
-		echo interface1 passed internet test.
+		echo "interface $interface1name passed internet test."
 		interface1hasInternet=0
 		externalName=$interface1name
 		externalIP=$interface1ip
 	else
-		echo interface1 failed internet test.
+		echo "interface $interface1name failed internet test."
 		interface1hasInternet=1
 		internalName=$interface1name
 		internalIP=$interface1ip
@@ -206,12 +206,12 @@ echo interface1ip: $interface1ip
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface2ip
 
 	if [[ $? -eq 0 ]]; then
-		echo interface2 passed internet test.
+		echo "interface $interface2name passed internet test."
 		interface2hasInternet=0
 		externalName=$interface2name
 		externalIP=$interface2ip
 	else
-		echo interface2 failed internet test.
+		echo "interface $interface2name passed internet test."
 		interface2hasInternet=1
 		internalName=$interface2name
 		internalIP=$interface2ip
@@ -221,11 +221,11 @@ echo interface1ip: $interface1ip
 
 	#Only proceed if one interface has internet and the other does not.
 	if [ $interface1hasInternet == 0 ] && [ $interface2hasInternet == 1 ]; then
-		echo interface 1 has internet.
+		echo "interface $interface1name  has internet."
 		continue=0
 
 	elif [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 0 ]; then
-		echo interface 2 has internet.
+		echo "interface $interface2name has internet."
 		continue=0
 	elif [ $interface1hasInternet == 0 ] && [ $interface2hasInternet == 0 ]; then
 
@@ -233,15 +233,11 @@ echo interface1ip: $interface1ip
 		echo " "
 		echo " "
 		MENU="
-
 It was detected that both interfaces have an internet connection.
 Hopefully this is because the internal interface on this system was previously configured with this tool.
-
 Please choose which interface to use as the external interface.
-
 1	interface: $interface1name IP: $interface1ip
 2	interface: $interface2name IP: $interface2ip
-
 "
 
         	echo "$MENU"
@@ -283,7 +279,6 @@ Please choose which interface to use as the external interface.
 
 	return $continue
 }
-
 
 initiateServices() {
 
