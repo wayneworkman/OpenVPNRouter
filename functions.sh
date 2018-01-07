@@ -181,35 +181,42 @@ identifyInterfaces() {
 
 	if [[ -z $interface1ip ]]; then
 		interface1ip=127.0.0.1
-	fi
-
-	if [[ -z $interface2ip ]]; then 
-		interface2ip=127.0.0.1
-	fi
-
-
-	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
-	if [[ $? -eq 0 ]]; then
-		interface1hasInternet=1
-		externalName=$interface1name
-		externalIP=$interface1ip
-	else
-		interface1hasInternet=0
+                interface1hasInternet=0
 		internalName=$interface1name
 		internalIP=$interface1ip
+	else
+		wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
+		if [[ $? -eq 0 ]]; then
+			interface1hasInternet=1
+			externalName=$interface1name
+			externalIP=$interface1ip
+		else
+			interface1hasInternet=0
+			internalName=$interface1name
+			internalIP=$interface1ip
+		fi
 	fi
 
 
-	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface2ip
 
-	if [[ $? -eq 0 ]]; then
-		interface2hasInternet=1
-		externalName=$interface2name
-		externalIP=$interface2ip
-	else
+
+        if [[ -z $interface2ip ]]; then
+		interface2ip=127.0.0.1
 		interface2hasInternet=0
 		internalName=$interface2name
 		internalIP=$interface2ip
+        else
+		wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface2ip
+
+		if [[ $? -eq 0 ]]; then
+			interface2hasInternet=1
+			externalName=$interface2name
+			externalIP=$interface2ip
+		else
+			interface2hasInternet=0
+			internalName=$interface2name
+			internalIP=$interface2ip
+		fi
 	fi
 
 

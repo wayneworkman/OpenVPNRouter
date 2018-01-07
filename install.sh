@@ -1,7 +1,7 @@
 #Set working directories.
 DIR=/opt/ovr
 currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-speed=2
+speed=4
 site=8.8.8.8
 desiredInternalIP=192.168.1.1
 desiredInternalMask=24
