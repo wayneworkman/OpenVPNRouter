@@ -51,6 +51,7 @@ fi
 
 if [[ $result == 0 ]]; then
 	#nothing, all is good.
+	echo "Ok!" > /dev/null 2>&1
 else
 
 	$echo Attempting to fix... >> $DIR/ovr.log
