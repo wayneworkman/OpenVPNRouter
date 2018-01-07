@@ -590,7 +590,7 @@ setupPIA() {
 		echo client > $DIR/custom.ovpn
 		echo dev tun0 >> $DIR/custom.ovpn
 		echo proto udp >> $DIR/custom.ovpn
-		echo remote $ChosenSite 1194 >> $DIR/custom.ovpn
+		echo remote $ChosenSite 1198 >> $DIR/custom.ovpn
 		echo resolv-retry infinite >> $DIR/custom.ovpn
 		echo nobind >> $DIR/custom.ovpn
 		echo persist-key >> $DIR/custom.ovpn
