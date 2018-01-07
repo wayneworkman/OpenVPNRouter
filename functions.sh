@@ -573,6 +573,9 @@ setupPIA() {
 			mkdir $DIR/openvpn
 		fi
 
+                # REFERENCE:
+                # https://helpdesk.privateinternetaccess.com/hc/en-us/articles/218984968-What-is-the-difference-between-the-OpenVPN-config-files-on-your-website-
+
                 https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip
 		#wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip -P $DIR/openvpn
                 wget -O $DIR/openvpn/openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip -P $DIR/openvpn
