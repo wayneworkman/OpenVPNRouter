@@ -189,7 +189,6 @@ identifyInterfaces() {
 
 
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
-echo interface1ip: $interface1ip
 	if [[ $? -eq 0 ]]; then
 		echo "interface $interface1name passed internet test."
 		interface1hasInternet=0
