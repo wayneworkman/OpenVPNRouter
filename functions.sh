@@ -174,10 +174,7 @@ identifyInterfaces() {
 	rm -f $DIR/interface2name.txt
 
 	interface1ip="$(/sbin/ip addr show | grep $interface1name | grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")"
-
 	interface2ip="$(/sbin/ip addr show | grep $interface2name | grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")"
-
-
 
 	if [[ -z $interface1ip ]]; then
 		interface1ip=127.0.0.1
@@ -196,9 +193,6 @@ identifyInterfaces() {
 			internalIP=$interface1ip
 		fi
 	fi
-
-
-
 
         if [[ -z $interface2ip ]]; then
 		interface2ip=127.0.0.1
@@ -219,14 +213,9 @@ identifyInterfaces() {
 		fi
 	fi
 
-
-
         echo "Interface1 name: $interface1name interface1 IP: $interface1ip has internet: $interface1hasInternet"
         echo "Interface2 name: $interface2name interface2 IP: $interface2ip has internet: $interface2hasInternet"
         
-
-
-
 	#Only proceed if one interface has internet and the other does not.
 	if [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 0 ]; then
 		echo "interface $interface1name  has internet."
@@ -237,7 +226,6 @@ identifyInterfaces() {
 		continue=1
 	elif [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 1 ]; then
 
-		
 		echo " "
 		echo " "
 		MENU="
@@ -247,17 +235,14 @@ Please choose which interface to use as the external interface.
     1	interface: $interface1name IP: $interface1ip
     2	interface: $interface2name IP: $interface2ip
 "
-
-        	echo "$MENU"
+		echo "$MENU"
         	echo -n "Selection: "
         	read interfaceChoice # Assign user input to variable
-
 
         	if [[ -z $interfaceChoice || ( $interfaceChoice != 1 && $interfaceChoice != 2 ) ]]; then
                 	echo Selection for interface was not valid, exiting.
                 	exit
         	fi
-		
 		
 		if [[ $interfaceChoice == 1 ]]; then
 			interface1hasInternet=1
@@ -281,10 +266,7 @@ Please choose which interface to use as the external interface.
             # this should only execute if neither interface has internet.
 
 		continue=0
-
-
 	fi
-
 
 	return $continue
 }
