@@ -235,8 +235,8 @@ identifyInterfaces() {
 It was detected that both interfaces have an internet connection.
 Hopefully this is because the internal interface on this system was previously configured with this tool.
 Please choose which interface to use as the external interface.
-1	interface: $interface1name IP: $interface1ip
-2	interface: $interface2name IP: $interface2ip
+    1	interface: $interface1name IP: $interface1ip
+    2	interface: $interface2name IP: $interface2ip
 "
 
         	echo "$MENU"
