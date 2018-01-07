@@ -191,12 +191,12 @@ identifyInterfaces() {
 	wget -q --tries=$speed --timeout=$speed --spider $site --bind-address $interface1ip
 	if [[ $? -eq 0 ]]; then
 		echo "interface $interface1name passed internet test."
-		interface1hasInternet=0
+		interface1hasInternet=1
 		externalName=$interface1name
 		externalIP=$interface1ip
 	else
 		echo "interface $interface1name failed internet test."
-		interface1hasInternet=1
+		interface1hasInternet=0
 		internalName=$interface1name
 		internalIP=$interface1ip
 	fi
@@ -206,12 +206,12 @@ identifyInterfaces() {
 
 	if [[ $? -eq 0 ]]; then
 		echo "interface $interface2name passed internet test."
-		interface2hasInternet=0
+		interface2hasInternet=1
 		externalName=$interface2name
 		externalIP=$interface2ip
 	else
 		echo "interface $interface2name passed internet test."
-		interface2hasInternet=1
+		interface2hasInternet=0
 		internalName=$interface2name
 		internalIP=$interface2ip
 	fi
@@ -219,14 +219,14 @@ identifyInterfaces() {
 
 
 	#Only proceed if one interface has internet and the other does not.
-	if [ $interface1hasInternet == 0 ] && [ $interface2hasInternet == 1 ]; then
+	if [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 0 ]; then
 		echo "interface $interface1name  has internet."
-		continue=0
+		continue=1
 
-	elif [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 0 ]; then
+	elif [ $interface1hasInternet == 0 ] && [ $interface2hasInternet == 1 ]; then
 		echo "interface $interface2name has internet."
-		continue=0
-	elif [ $interface1hasInternet == 0 ] && [ $interface2hasInternet == 0 ]; then
+		continue=1
+	elif [ $interface1hasInternet == 1 ] && [ $interface2hasInternet == 1 ]; then
 
 		
 		echo " "
@@ -251,26 +251,27 @@ Please choose which interface to use as the external interface.
 		
 		
 		if [[ $interfaceChoice == 1 ]]; then
-			interface1hasInternet=0
+			interface1hasInternet=1
                 	externalName=$interface1name
                 	externalIP=$interface1ip
-                	interface2hasInternet=1
+                	interface2hasInternet=0
                 	internalName=$interface2name
                 	internalIP=$interface2ip
 		elif [[ $interfaceChoice == 2 ]]; then
-                        interface1hasInternet=1
+                        interface1hasInternet=0
                         externalName=$interface2name
                         externalIP=$interface2ip
-                        interface2hasInternet=0
+                        interface2hasInternet=1
                         internalName=$interface1name
                         internalIP=$interface1ip
 		fi
 
-		continue=0		
+		continue=1
 
 	else
+            # this should only execute if neither interface has internet.
 
-		continue=1
+		continue=0
 
 
 	fi
