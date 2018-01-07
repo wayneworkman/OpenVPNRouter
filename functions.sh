@@ -635,7 +635,7 @@ setupInternalInterface() {
                 echo UUID="$UUID" >> $internalConfig
                 echo DEVICE="$internalName" >> $internalConfig
                 echo ONBOOT="yes" >> $internalConfig
-                echo PEERDNS="no" >> $internalConfig
+                echo PEERDNS="yes" >> $internalConfig
                 echo DNS1=$MasterDNS >> $internalConfig
                 echo DNS2=$SlaveDNS >> $internalConfig
                 echo IPADDR=$internalIP >> $internalConfig
