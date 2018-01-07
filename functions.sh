@@ -574,8 +574,8 @@ setupPIA() {
 		unzip $DIR/openvpn/openvpn.zip -d $DIR/openvpn
 		rm -f $DIR/openvpn/openvpn.zip
 		rm -f $DIR/openvpn/*.ovpn
-		mv $DIR/openvpn/ca.crt $DIR/ca.crt
-		mv $DIR/openvpn/crl.pem $DIR/crl.pem
+		mv $DIR/openvpn/ca.rsa.2048.crt $DIR/ca.crt
+		mv $DIR/openvpn/crl.rsa.2048.pem $DIR/crl.pem
 		rm -rf $DIR/openvpn
 
 
