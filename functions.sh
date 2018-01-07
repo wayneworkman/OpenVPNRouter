@@ -618,6 +618,9 @@ setupInternalInterface() {
                 UUID="$(grep 'UUID=' $internalConfig | awk -F'"' '{$0=$2}1')"
 
 
+		internalIP=$desiredInternalIP
+		internalMask=$desiredInternalMask
+
                 rm -f $internalConfig
                 touch $internalConfig
 
@@ -635,8 +638,8 @@ setupInternalInterface() {
                 echo PEERDNS="no" >> $internalConfig
                 echo DNS1=$MasterDNS >> $internalConfig
                 echo DNS2=$SlaveDNS >> $internalConfig
-                echo IPADDR=$desiredInternalIP >> $internalConfig
-                echo PREFIX=$desiredInternalMask >> $internalConfig
+                echo IPADDR=$internalIP >> $internalConfig
+                echo PREFIX=$internalMask >> $internalConfig
                 echo GATEWAY=$externalIP >> $internalConfig
                 continue=1
 
